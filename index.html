@@ -5,54 +5,95 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Homework-2</title>
 </head>
 <body>
 
 <script>
+    
     // 1 task
-    const userNames = ["Петрик Ольга Іванівна", "Гнатюк Петро Антонович", "Рудко Андрій Опанасович"];
-    const sortArr = userNames.sort();
-    const initials = userNames.sort().map(item => {
-        return item.split(' ').map(name => name.substring(0,1) + '.').join('');
-    });
-    console.log(initials);
-
-
-
-
-    // 2 task
-    const userNames2 = ['Петро', 'Емма', 'Юстин', 'Ілля', 'Марта', 'Яна', 'Василь', 'Антон', 'Олена'];
-    const vowels = ['А','Е','Є','И','І','Ї','О','У','Ю','Я'];
-    // variant 1
-    let filteredNames = [];
-    userNames2.forEach(item => {
-        if(vowels.includes(item.substring(0,1))) {
-            filteredNames.push(item);
+    function methods(diff_time, settings) {
+        let result = null;
+        switch(settings) {
+            case 'hours':
+                result = Math.ceil(diff_time / (1000 * 60 * 60));
+                break
+            case 'minutes':
+                result = Math.ceil(diff_time / (1000 * 60));
+                break
+            case 'seconds':
+                result = diff_time / 1000
+                break
+            default:
+                result = Math.ceil(diff_time / (1000 * 60 * 60 * 24)) // days
         }
-    })
-    console.log(filteredNames);
+        console.log(`${result} ${settings}`);
+    }
 
-    // variant 2
-    const filterames = userNames2.filter(item => vowels.includes(item.substring(0,1)));
-    console.log(filterames);
+    function durationBetweenDates(startTime , endTime , settings) {
+        const start_time = new Date(startTime);
+        const end_time = new Date(endTime);
+        const diff_time = Math.abs(start_time - end_time);
+        return methods(diff_time , settings);
+
+    }
+    durationBetweenDates('05 Aug 1985', '04 Aug 1985', 'hours')
+    durationBetweenDates('07 Aug 1985', '05 Aug 1985', 'minutes')
+    durationBetweenDates('02 Aug 1985', '03 Aug 1985', 'seconds')  // поверне '86400 seconds'
+    durationBetweenDates('31 Jan 2022', '03 Feb 2021', 'days')  // поверне '362 days'
 
 
+
+    // task 2
+    const priceData = {
+        Apples: '23.4',
+        BANANAS: '48',
+        oRAngGEs: '48.7584',
+    };
+
+    function optimizer(data) {
+        return Object.keys(data).reduce((acc , key) => {
+            acc[key.toLowerCase()] = Number(data[key]).toFixed(2);
+            return acc
+        }, {})
+    };
+    //console.log(optimizer(priceData));
 
 
     // 3 task
-    const currentMaxValue = 4589;
-    let reverseMaxValue;
-    reverseMaxValue = +currentMaxValue.toString().split("").reverse().toString().replace(/,/g , '');
-    console.log(reverseMaxValue); // 9854
-    console.log(typeof reverseMaxValue); // 'number'
+    function recursiveOddSumTo(number) {
+        if (number === 0) return number
+        return (number % 2) ? number + recursiveOddSumTo(number - 1) : recursiveOddSumTo(number - 1);
+    };
 
+    // Але для мене зараз цей запис(гамно) білиш зрозуміліший))
 
-    const resultsArray = [1, 2, [3, [4]] , 10 , [[3, [4]]] , [[['3', ['100']]]] , [[[3, [4]]]] , '10'];
-    let productOfArray = resultsArray.flat(Infinity).reduce(function(acc , item){
-       return acc + Number(item);
-    }, 0);
-    console.log(productOfArray);
+    // function recursiveOddSumTo(number) {
+    //     if (number === 0) {
+    //         return number;
+    //     } else {
+    //         if(number % 2) {
+    //             return number + recursiveOddSumTo(number - 1);
+    //         } else {
+    //             return recursiveOddSumTo(number - 1);
+    //         }
+    //     }
+    // };
+
+    //console.log(recursiveOddSumTo(1)) // 1
+    //console.log(recursiveOddSumTo(10)) // 25
+
+    // 4
+    function iterativeOddSumTo(number) {
+        let sum = 0;
+        for(let i = 0; i <= number; i++) {
+            if (i % 2) sum += i;
+        }
+        return sum;
+    };
+
+    //console.log(iterativeOddSumTo(1)) // 1
+    //console.log(iterativeOddSumTo(10)) // 25
 
 </script>
 
