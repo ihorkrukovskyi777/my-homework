@@ -30,7 +30,7 @@
         console.log(`${result} ${settings}`);
     }
 
-    function durationBetweenDates(startTime , endTime , settings) {
+    function durationBetweenDates(startTime = '05 Aug 1985' , endTime = '06 Aug 1985' , settings = 'days') {
         const start_time = new Date(startTime);
         const end_time = new Date(endTime);
         const diff_time = Math.abs(start_time - end_time);
