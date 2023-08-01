@@ -5,54 +5,112 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Homework-3</title>
 </head>
 <body>
 
+    <button id="plus">plus</button>
+    <button id="minus">minus</button>
+
 <script>
-    // 1 task
-    const userNames = ["Петрик Ольга Іванівна", "Гнатюк Петро Антонович", "Рудко Андрій Опанасович"];
-    const sortArr = userNames.sort();
-    const initials = userNames.sort().map(item => {
-        return item.split(' ').map(name => name.substring(0,1) + '.').join('');
-    });
-    console.log(initials);
+
+    //1
+
+    function addThemAll(...arr) {
+        return arr.reduce(function(acc, val) {
+            return acc + val;
+        }, 0);
+    }
+
+    //2
+    function multiply(a) {
+        return function(x) {
+            return function(y) {
+                return a(x, y);
+            };
+        };
+    }
+
+    function sum(a, b) {
+        return a * b;
+    }
+
+    multiply = multiply(sum);
+
+
+    console.log(multiply(5)(5))     // 25
+    console.log(multiply(2)(-2))    // -4
+    console.log(multiply(4)(3))     // 12
+
+    
+    // 3
+    const movies = [
+        {
+            movieName: 'The Thing',
+            releaseYear: 1982,
+            directedBy: 'Carpenter',
+            runningTimeInMinutes: 109,
+        },
+        {
+            movieName: 'Aliens',
+            releaseYear: 1986,
+            directedBy: 'Cameron',
+            runningTimeInMinutes: 137,
+        },
+        {
+            movieName: 'Men in Black',
+            releaseYear: 1997,
+            directedBy: 'Sonnenfeld',
+            runningTimeInMinutes: 98,
+        },
+        {
+            movieName: 'Predator',
+            releaseYear: 1987,
+            directedBy: 'McTiernan',
+            runningTimeInMinutes: 107,
+        },
+
+    ];
+
+    //console.log(movies.sort(byProperty('releaseYear', '>')));
+    // виведе масив фільмів посортованих по року випуску, від старішого до новішого
+    //console.log(movies.sort(byProperty('runningTimeInMinutes', '<')));
+    // виведе масив фільмів посортованих по їх тривалості, від найдовшого до найкоротшого
+    //console.log(movies.sort(byProperty('movieName', '>')));
+    // виведе масив фільмів посортованих по назві, в алфавітному порядку
+
+    function byProperty(property, direction) {
+        return function(a , b) {
+            if(direction == '>') {
+                if (a[property] < b[property]) return -1
+                if(a[property] > b[property]) return 1
+
+            }
+
+            if(direction == '<') {
+                if(a[property] > b[property]) return -1
+                if(a[property] < b[property]) return 1
+            }
+        };
+    }
+
+
+
+    //4
+    const userNames = ['Петро', 'Емма', 'Петро', 'Емма', 'Марта', 'Яна', 'Василь', 'Антон', 'Олена', 'Емма'];
+
+    function filterUnique(array) {
+        return new Set(array);
+    }
+
+    //console.log(filterUnique(userNames)); // ['Петро', 'Емма', 'Марта', 'Яна', 'Василь', 'Антон', 'Олена'];
 
 
 
 
-    // 2 task
-    const userNames2 = ['Петро', 'Емма', 'Юстин', 'Ілля', 'Марта', 'Яна', 'Василь', 'Антон', 'Олена'];
-    const vowels = ['А','Е','Є','И','І','Ї','О','У','Ю','Я'];
-    // variant 1
-    let filteredNames = [];
-    userNames2.forEach(item => {
-        if(vowels.includes(item.substring(0,1))) {
-            filteredNames.push(item);
-        }
-    })
-    console.log(filteredNames);
-
-    // variant 2
-    const filterames = userNames2.filter(item => vowels.includes(item.substring(0,1)));
-    console.log(filterames);
 
 
 
-
-    // 3 task
-    const currentMaxValue = 4589;
-    let reverseMaxValue;
-    reverseMaxValue = +currentMaxValue.toString().split("").reverse().toString().replace(/,/g , '');
-    console.log(reverseMaxValue); // 9854
-    console.log(typeof reverseMaxValue); // 'number'
-
-
-    const resultsArray = [1, 2, [3, [4]] , 10 , [[3, [4]]] , [[['3', ['100']]]] , [[[3, [4]]]] , '10'];
-    let productOfArray = resultsArray.flat(Infinity).reduce(function(acc , item){
-       return acc + Number(item);
-    }, 0);
-    console.log(productOfArray);
 
 </script>
 
