@@ -24,22 +24,18 @@
 
     //2
    
-    function multiply(a) {
-        return function(x) {
-            return function(y) {
-                return a(x , y);
-            }
-        }    
+    function multiply(f) {
+        let start = f;
+        return function (b) {
+            return f * b;
+        };
     }
 
-    const sum = function(a , b) {
-        return a * b
-    };
 
-    multiply = multiply(sum);
+    
 
     console.log(multiply(5)(5))     // 25
-    /*console.log(multiply(2)(-2))    // -4
+    console.log(multiply(2)(-2))    // -4
     console.log(multiply(4)(3))     // 12*/
 
     
