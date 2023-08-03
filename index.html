@@ -23,24 +23,24 @@
     }
 
     //2
+   
     function multiply(a) {
         return function(x) {
             return function(y) {
-                return a(x, y);
-            };
-        };
+                return a(x , y);
+            }
+        }    
     }
 
-    function sum(a, b) {
-        return a * b;
-    }
+    const sum = function(a , b) {
+        return a * b
+    };
 
     multiply = multiply(sum);
 
-
     console.log(multiply(5)(5))     // 25
-    console.log(multiply(2)(-2))    // -4
-    console.log(multiply(4)(3))     // 12
+    /*console.log(multiply(2)(-2))    // -4
+    console.log(multiply(4)(3))     // 12*/
 
     
     // 3
@@ -82,14 +82,11 @@
     function byProperty(property, direction) {
         return function(a , b) {
             if(direction == '>') {
-                if (a[property] < b[property]) return -1
-                if(a[property] > b[property]) return 1
-
+                return a[property] > b[property] ? 1 : -1;
             }
 
             if(direction == '<') {
-                if(a[property] > b[property]) return -1
-                if(a[property] < b[property]) return 1
+                return a[property] > b[property] ? -1 : 1
             }
         };
     }
