@@ -93,8 +93,9 @@ saveEditTask.addEventListener('click' , saveAfterEditTask);
 function saveAfterEditTask() {
     const getAllTasks = JSON.parse(localStorage.getItem('tasks'));
     const id = inputEdit.id
-    const valueEdit = inputEdit.value
-    if (valueEdit > 0) {
+    const valueEdit = inputEdit.value;
+
+    if (valueEdit.length > 0) {
         const newState = getAllTasks.map(obj =>obj.id === Number(id) ? { ...obj, task: valueEdit } : obj);
         saveTasks(newState);
         closeModal();
