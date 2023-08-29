@@ -1,60 +1,46 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Список завдань</title>
+    <link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+<div class="container">
+    <div class="create-task-block">
+        <form class="create-task-form">
+            <h3 class="task-title">Нове завдання</h3>
+            <div class="input-field">
+                <input type="text" name="task" placeholder="Завдання" class="task-input" data-value-task />
+            </div>
+            <button type="submit" class="btn" data-add-task>Додати завдання</button>
+        </form>
+    </div>
+    ​
+    <div class="filter-task-block">
+        <h3 class="task-title">Список завдань</h3>
+        <div class="input-field">
+            <input
+                    type="text"
+                    name="filter"
+                    class="filter-input"
+                    placeholder="Пошук завдань"
+                    data-filter-task
+            />
+        </div>
+        <ul class="collection" data-collection></ul>
+        <button class="clear-tasks" data-clear-all>Видалити всі завдання</button>
+    </div>
+    <div id="showModalEditTask" data-edit-modal>
+        <input type="text" data-edit-task value="">
+        <button data-save-edit-task>save</button>  
+    </div>      
+</div>
+<script src="./app.js"></script>
 
-<script>
-    // 1 task
-    const userNames = ["Петрик Ольга Іванівна", "Гнатюк Петро Антонович", "Рудко Андрій Опанасович"];
-    const sortArr = userNames.sort();
-    const initials = userNames.sort().map(item => {
-        return item.split(' ').map(name => name.substring(0,1) + '.').join('');
-    });
-    console.log(initials);
-
-
-
-
-    // 2 task
-    const userNames2 = ['Петро', 'Емма', 'Юстин', 'Ілля', 'Марта', 'Яна', 'Василь', 'Антон', 'Олена'];
-    const vowels = ['А','Е','Є','И','І','Ї','О','У','Ю','Я'];
-    // variant 1
-    let filteredNames = [];
-    userNames2.forEach(item => {
-        if(vowels.includes(item.substring(0,1))) {
-            filteredNames.push(item);
-        }
-    })
-    console.log(filteredNames);
-
-    // variant 2
-    const filterames = userNames2.filter(item => vowels.includes(item.substring(0,1)));
-    console.log(filterames);
-
-
-
-
-    // 3 task
-    const currentMaxValue = 4589;
-    let reverseMaxValue;
-    reverseMaxValue = +currentMaxValue.toString().split("").reverse().toString().replace(/,/g , '');
-    console.log(reverseMaxValue); // 9854
-    console.log(typeof reverseMaxValue); // 'number'
-
-
-    const resultsArray = [1, 2, [3, [4]] , 10 , [[3, [4]]] , [[['3', ['100']]]] , [[[3, [4]]]] , '10'];
-    let productOfArray = resultsArray.flat(Infinity).reduce(function(acc , item){
-       return acc + Number(item);
-    }, 0);
-    console.log(productOfArray);
-
-</script>
 
 </body>
 </html>
